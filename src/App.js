@@ -1,23 +1,23 @@
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
+import NavigationBar from './components/NavigationBar';
 
 function App() {
+
+  // States for searching - if applicable
+  const [search, setSearch] = useState('');
+  const [searching, setSearching] = useState(false);
+
+  // Function to control searching views
+  const searchFor = (searchValue, searchState) => {
+    setSearch(searchValue);
+    setSearching(searchState);
+  }
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container-fluid">
+      <NavigationBar search={searchFor}/>
     </div>
   );
 }
