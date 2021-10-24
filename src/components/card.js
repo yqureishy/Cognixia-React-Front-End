@@ -1,16 +1,23 @@
-import React, {Component} from "react";
+import React from "react";
 
-class Card extends Component{
+function Card (props){
 
-    render(){
-        return(
-            <div className="card bg-secondary text-green rounded col-lg-8 col-12 col-md-12" >
-                <Header name={this.props.info.name} />
-                <Body rating ={this.props.info.rating} address={this.props.info.address} 
-                               phone={this.props.info.phone} description={this.props.info.description} />
-            </div>
-        );
+    const HandleClick = (e) => {
+        e.preventDefault();
+        props.findReviews(props.info.id, true);
     }
+
+    return(
+        <div onClick={HandleClick}
+                style={{ cursor: "pointer" }} 
+                className="card bg-secondary text-green rounded col-lg-8 col-12 col-md-12"
+                id={'card ' + props.info.id}>
+
+            <Header name={props.info.name} />
+            <Body rating ={props.info.rating} address={props.info.address} 
+                            phone={props.info.phone} description={props.info.description} />
+        </div>
+    );
 }
 
 function Header(props) {

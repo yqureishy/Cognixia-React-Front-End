@@ -1,8 +1,15 @@
 import React from "react";
 import { cardGrouping } from "../services/FormatData";
 import Card from "./Card";
+import Review from "./Review";
 
 function CardLayout(props){
+
+    let reviews = null;
+
+    if(props.cardId){
+        reviews = props.cardId;
+    }
 
     const makeDecks = (input, size) => {
         return cardGrouping(input, size);
@@ -11,9 +18,16 @@ function CardLayout(props){
     return(
 
         <div className='pt-3'>
-            {makeDecks(props.restaurant, 2).map((deck, idx) => (
-                <div className='card-deck container-fluid pt-3 row'>
-                    {deck.map((restaurant, idx) => <Card info={restaurant}/>)}
+            {reviews === null && makeDecks(props.restaurant, 2).map((deck, idx) => (
+                <div key={idx} className='card-deck container-fluid pt-3 row'>
+                    {deck.map((restaurant, idx) => <Card key={restaurant.id} 
+                                                         findReviews={props.findReviews} 
+                                                         info={restaurant}/>)}
+                </div>
+            ))}
+            {reviews != null && props.findReviews.map((review, idx) => (
+                <div key={idx} className='card-deck container-fluid pt-3 row'>
+                    <Review key={review.id} info={review} />
                 </div>
             ))}
         </div>
