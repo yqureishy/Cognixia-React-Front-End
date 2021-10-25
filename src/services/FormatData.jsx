@@ -25,3 +25,16 @@ export const cardGrouping = (array, size) => {
 
 }
 
+export const findRestaurantReviews = (array, cardId) => {
+
+    if (array && Array.isArray(array)) {
+        return array.reduce((reviewList, review) =>{
+            if(review.restId === cardId){
+                reviewList.push(review);
+            }
+            return reviewList;
+        }, []);
+
+    }
+
+}
